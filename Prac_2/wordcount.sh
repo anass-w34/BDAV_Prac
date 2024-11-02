@@ -98,52 +98,7 @@ Riyaz Ahamed
 24/10/29 00:46:29 INFO mapreduce.Job:  map 0% reduce 0%
 24/10/29 00:47:47 INFO mapreduce.Job:  map 100% reduce 0%
 24/10/29 00:48:37 INFO mapreduce.Job:  map 100% reduce 100%
-24/10/29 00:48:40 INFO mapreduce.Job: Job job_1730104666546_0001 completed successfully
-24/10/29 00:48:42 INFO mapreduce.Job: Counters: 49
-	File System Counters
-		FILE: Number of bytes read=82
-		FILE: Number of bytes written=286933
-		FILE: Number of read operations=0
-		FILE: Number of large read operations=0
-		FILE: Number of write operations=0
-		HDFS: Number of bytes read=248
-		HDFS: Number of bytes written=52
-		HDFS: Number of read operations=6
-		HDFS: Number of large read operations=0
-		HDFS: Number of write operations=2
-	Job Counters 
-		Launched map tasks=1
-		Launched reduce tasks=1
-		Data-local map tasks=1
-		Total time spent by all maps in occupied slots (ms)=77140
-		Total time spent by all reduces in occupied slots (ms)=45296
-		Total time spent by all map tasks (ms)=77140
-		Total time spent by all reduce tasks (ms)=45296
-		Total vcore-milliseconds taken by all map tasks=77140
-		Total vcore-milliseconds taken by all reduce tasks=45296
-		Total megabyte-milliseconds taken by all map tasks=78991360
-		Total megabyte-milliseconds taken by all reduce tasks=46383104
-	Map-Reduce Framework
-		Map input records=12
-		Map output records=20
-		Map output bytes=208
-		Map output materialized bytes=82
-		Input split bytes=120
-		Combine input records=20
-		Combine output records=6
-		Reduce input groups=6
-		Reduce shuffle bytes=82
-		Reduce input records=6
-		Reduce output records=6
-		Spilled Records=12
-		Shuffled Maps =1
-		Failed Shuffles=0
-		Merged Map outputs=1
-		GC time elapsed (ms)=1638
-		CPU time spent (ms)=8000
-		Physical memory (bytes) snapshot=345632768
-		Virtual memory (bytes) snapshot=3021582336
-		Total committed heap usage (bytes)=226365440
+
 	Shuffle Errors
 		BAD_ID=0
 		CONNECTION=0
