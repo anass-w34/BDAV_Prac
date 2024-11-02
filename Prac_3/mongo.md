@@ -1,19 +1,4 @@
-Here’s a guide to perform the CRUD operations, querying, and indexing tasks in MongoDB Compass, which is MongoDB’s official desktop GUI application. This will cover:
 
-1) Setting up a Sample Database and Collection in MongoDB Compass.
-2) Inserting, Querying, Updating, and Deleting Documents.
-3) Creating and Using Indexes.
-
-Prerequisites
-~MongoDB Compass: Ensure MongoDB Compass is installed and connected to your MongoDB instance.
-
-
-Step-by-Step Guide
------------------------ Part 1: Setting Up the Sample Database and Collection ------------------
-1) Open MongoDB Compass and connect to your MongoDB server.
-2) Create a New Database:
-
-~ In the main MongoDB Compass interface, click on the "Create Database" button.
 ~ Database Name: sampleDB
 ~ Collection Name: students
 ~ Click Create Database.
