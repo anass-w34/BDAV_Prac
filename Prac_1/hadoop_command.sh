@@ -19,6 +19,10 @@ drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /user
 drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /var
 
 
+create a textfile in cloudera home
+
+[cloudera@quickstart ~]$ hadoop fs -put /home/cloudera/pract1/test.txt /filecopyfromlocal.txt
+
 [cloudera@quickstart Prac_1]$ hadoop fs -put ~/test.txt /filecopyfromlocal.txt
 [cloudera@quickstart Prac_1]$ hadoop fs -ls /
 Found 8 items
@@ -42,6 +46,9 @@ drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /var
 hii anas
 
 [cloudera@quickstart Prac_1]$ hadoop fs -touchz /anadfolder/prac_1_touch_test.txt
+
+[cloudera@quickstart ~]$ hdfs dfs -ls /hudafolder
+
 
 [cloudera@quickstart Prac_1]$ hadoop fs -stat %b /filecopyfromlocal.txt
 9
@@ -85,6 +92,10 @@ drwxrwxrwt   - hdfs     supergroup          0 2024-10-28 01:13 /tmp
 drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /user
 drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /var
 [cloudera@quickstart Prac_1]$ 
+
+[cloudera@quickstart ~]$ hadoop fs -rm -r /anadfolder
+
+
 
 
 ********************************************************************************************************************
