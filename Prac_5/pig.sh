@@ -1,53 +1,52 @@
 make prac_5 folder in cloudera local 
 
 open terminal and create directory named prac_5 in hdfs. 
+in terminal
+cd prac_5
+hdfs dfs -mkdir /prac_5
 
-2) Prepare and Upload Sample Data to HDFS
-Data Files:
-data_model.csv: For creating a Pig data model.
-sample_student_data.csv: For basic operations, filtering, grouping, and joining.
+
+create files
 
 Sample Data for data_model.csv:
 John Doe;New York,10001;{(Math,85),(Science,90)};[1#85,2#90]
 Jane Smith;Los Angeles,90001;{(Math,92),(Science,88)};[1#92,2#88]
-
-create a new document in cloudera and copy the data_model.csv content save the file as data_model.csv in prac_5 folder cloudera local 
+ 
 
 Sample Data for sample_student_data.csv:
 1,John,Doe,30,555-1234,New York
 2,Jane,Smith,28,555-5678,Los Angeles
 3,Alex,Brown,35,555-8765,Chicago
 
-create a new document in cloudera and copy the sample_student_data.csv content save the file as sample_student_data.csv in prac_5 folder cloudera local 
-
-
 Upload Files to HDFS:
 Place these files in a local directory, then upload to HDFS:
 bash:
-hdfs dfs -put /path/to/data_model.csv /user/cloudera/data_model.csv                       ex: hdfs dfs -put /prac_5/data_model.csv /prac_5/data_model.csv   
-hdfs dfs -put /path/to/sample_student_data.csv /user/cloudera/sample_student_data.csv     ex: hdfs dfs -put /prac_5/sample_student_data.csv /prac_5/sample_student_data.csv
+hdfs dfs -put /path/to/data_model.csv /user/cloudera/data_model.csv                 ex:  hdfs dfs -put /home/cloudera/prac_5/data_model.csv /prac_5/data_model.csv
+
+hdfs dfs -put /path/to/sample_student_data.csv /user/cloudera/sample_student_data.csv    
+ex: hdfs dfs -put /home/cloudera/prac_5/sample_student_data.csv /prac_5/sample_student_data.csv
+
 
 *************************************************************************************************************************************************************************************************************************
 
  --------------------------------------------------------------------- Part 1: Pig Latin Basic ----------------------------------------------
-Load Data from Files:
+open new terminal and start pig
+
+[cloudera@quickstart ~]$ cd prac_5
+[cloudera@quickstart prac_5]$ pig
+
+
 1) a) Load data_model.csv for the data model
 <pig terminal>
-DataModels = LOAD '/user/cloudera/data_model.csv' USING PigStorage(';')                                             
-             AS (name:chararray, address:tuple(city:chararray, pincode:chararray), 
-                 result:bag{info:tuple(sub:chararray, marks:int)}, m:map[int]);
+
                  
-ex: DataModels = LOAD '/prac_5/data_model.csv' USING PigStorage(';')                                         
+ DataModels = LOAD '/prac_5/data_model.csv' USING PigStorage(';')                                         
              AS (name:chararray, address:tuple(city:chararray, pincode:chararray), 
                  result:bag{info:tuple(sub:chararray, marks:int)}, m:map[int]);
                  
 1) b) Load sample_student_data.csv for basic operations
 <pig terminal>
-student_info = LOAD '/user/cloudera/sample_student_data.csv' USING PigStorage(',')
-               AS (id:int, first_name:chararray, last_name:chararray, age:int, 
-                   contact:chararray, city:chararray);
-
-ex: student_info = LOAD '/prac_5/sample_student_data.csv' USING PigStorage(',')
+ student_info = LOAD '/prac_5/sample_student_data.csv' USING PigStorage(',')
                AS (id:int, first_name:chararray, last_name:chararray, age:int, 
                    contact:chararray, city:chararray);
 
@@ -73,10 +72,10 @@ STORE student_info INTO '/user/cloudera/output/student_info_output' USING PigSto
 STORE DataModels INTO '/user/cloudera/output/DataModels_output' USING PigStorage('|');         ex: STORE DataModels INTO '/prac_5/Data_Models_output/DataModels_output' USING PigStorage('|');
 
 2) Download from HDFS to Local:
-After storing data, download it to the local filesystem:
+After storing data, download it to the local filesystem:(do it in hdfs terminal)
 <bash>
-hdfs dfs -get /user/cloudera/output/student_info_output /local/path/student_info_output     ex: hdfs dfs -get /prac_5/student_info_output /prac_5/student_info_output
-hdfs dfs -get /user/cloudera/output/student_info_output /local/path/student_info_output     ex: hdfs dfs -get /prac_5/Data_Models_output/DataModels_output /prac_5/DataModels_output 
+hdfs dfs -get /user/cloudera/output/student_info_output /local/path/student_info_output     ex: hdfs dfs -get /prac_5/student_info_output /home/cloudera/prac_5/student_info_output
+hdfs dfs -get /user/cloudera/output/student_info_output /local/path/student_info_output     ex:  hdfs dfs -get /prac_5/Data_Models_output/DataModels_output /home/cloudera/prac_5/DataModels_output 
 
 -------------------------------------------------------------------- Part 4: Create Your Script ----------------------------------------------
 Write a Pig Script:
@@ -85,7 +84,7 @@ create a new document in prac_5 folder cloudera local and copy paste the below c
 ****************** < make necesaary changes to the path mention in student_analysis.pig > ***********************************
 
 -- Load student data
-student_info = LOAD '/user/cloudera/sample_student_data.csv' USING PigStorage(',')
+student_info = LOAD '/prac_5/sample_student_data.csv' USING PigStorage(',')
                AS (id:int, first_name:chararray, last_name:chararray, age:int, 
                    contact:chararray, city:chararray);
 
@@ -101,13 +100,15 @@ avg_age_by_city = FOREACH city_group GENERATE group AS city, AVG(student_info.ag
 -- Store results
 STORE avg_age_by_city INTO '/user/cloudera/output/avg_age_by_city' USING PigStorage(',');
 
+******************************
+
 save the file as < student_analysis.pig > 
 
 -------------------------------------------------------------------- Part 5: Save and Execute the Script ----------------------------------------------
 Save and Run the Script:
 Save the script as student_analysis.pig and execute it from the command line:
 <bash > 
-pig -x mapreduce /path/to/student_analysis.pig          ex: pig -x mapreduce /prac_5/student_analysis.pig
+pig -x mapreduce /path/to/student_analysis.pig          ex: pig -x mapreduce /home/cloudera/prac_5/student_analysis.pig
 
 -------------------------------------------------------------------- Part 6: Pig Operations ----------------------------------------------
 Diagnostic Operators
@@ -132,6 +133,7 @@ Group student data by city:
 city_group = GROUP student_info BY city;
 
 2) Join with Another Dataset (e.g., DataModels):
+
 Join student_info with DataModels if fields align
 joined_data = JOIN student_info BY city, DataModels BY address.city;
 DUMP joined_data;
@@ -157,7 +159,7 @@ create a new document in prac_5 folder cloudera local and copy paste the below c
 
 2) Upload other_student_data.csv to HDFS
 < bash> 
-hdfs dfs -put /path/to/other_student_data.csv /user/cloudera/other_student_data.csv
+[cloudera@quickstart prac_5]$ hdfs dfs -put /home/cloudera/prac_5/other_student_data.csv /prac_5/other_student_data.csv
 
 3) Load and Union the Datasets
 Load other_student_data.csv with the same schema as student_info:
@@ -183,10 +185,12 @@ SPLIT student_info INTO older_than_30 IF age > 30, younger_than_30 IF age <= 30;
 
 Filtering and Sorting
 1) Filter Students from a Specific City:
+
 nyc_students = FILTER student_info BY city == 'New York';
 DUMP nyc_students
 
 2) sort Students by Age:
+
 Sort student_info by age in descending order:
 sorted_by_age = ORDER student_info BY age DESC;
 
