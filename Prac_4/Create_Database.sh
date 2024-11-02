@@ -15,22 +15,6 @@ Employee CSV Content:
 
 3)Upload to HDFS:
 Save this content in a file named employee.csv and upload it to HDFS:
-hdfs dfs -put /path/to/employee.csv /user/cloudera/employee.csv
-
-[cloudera@quickstart Prac_4]$ hdfs dfs -ls /
-Found 12 items
-drwxr-xr-x   - cloudera supergroup          0 2024-10-29 00:34 /Prac_2
-drwxr-xr-x   - cloudera supergroup          0 2024-10-28 23:02 /anadfolder
-drwxrwxrwx   - hdfs     supergroup          0 2017-10-23 09:15 /benchmarks
--rw-r--r--   1 cloudera supergroup          9 2024-10-28 23:14 /destination_1_prac_1
--rw-r--r--   1 cloudera supergroup          9 2024-10-28 22:47 /destination_2_prac_1
-drwxr-xr-x   - hbase    supergroup          0 2024-10-29 22:14 /hbase
-drwxr-xr-x   - cloudera supergroup          0 2024-10-29 08:57 /matrix_multiplication_1
-drwxr-xr-x   - cloudera supergroup          0 2024-10-29 00:48 /output_prac_2
-drwxr-xr-x   - solr     solr                0 2017-10-23 09:18 /solr
-drwxrwxrwt   - hdfs     supergroup          0 2024-10-28 01:13 /tmp
-drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /user
-drwxr-xr-x   - hdfs     supergroup          0 2017-10-23 09:17 /var
 
 [cloudera@quickstart Prac_4]$ hdfs dfs -mkdir /prac_4
 [cloudera@quickstart Prac_4]$ hdfs dfs -put /home/cloudera/Prac_4/employee.csv /prac_4
@@ -62,7 +46,7 @@ Found 1 items
 [cloudera@quickstart Prac_4]$ 
 
 
-*****************************  1. Creation of Database and Table in Hive **************************************************************************
+*****************************  1. Creation of Database and Table in Hive terminal **************************************************************************
 1) Create a Database:
 Create a new Hive database:
 CREATE DATABASE User1;
@@ -89,6 +73,7 @@ STORED AS TEXTFILE;
 4)Load Data into the Table:
 Load the employee.csv data from HDFS into employee49:
 LOAD DATA INPATH '/user/cloudera/employee.csv' INTO TABLE employee49;
+eg ---hive> LOAD DATA INPATH '/prac_4/employee.csv' INTO TABLE employee49;
 
 5)Verify Data Load:
 Query the table to verify data loading:
