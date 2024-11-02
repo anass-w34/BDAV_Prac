@@ -11,7 +11,10 @@ wget https://www.gutenberg.org/files/1342/1342-0.txt -O pride_and_prejudice.txt
 
 2) Upload to HDFS (if required):
 < bash >
-hdfs dfs -put pride_and_prejudice.txt /user/cloudera/pride_and_prejudice.txt
+
+[cloudera@quickstart Prac_6]$ hdfs dfs -mkdir /prac_6
+
+hdfs dfs -put pride_and_prejudice.txt /prac_6/pride_and_prejudice.txt
 
 3) Start spark-shell with SparkContext:
 Start the Spark shell to get an instance of SparkContext.
@@ -23,10 +26,10 @@ spark-shell
 ~ Load data from a local file or HDFS:
 < spark terminal >
 // From Local File System
-val textFile = sc.textFile("file:///path/to/pride_and_prejudice.txt")
+val textFile = sc.textFile("file:///home/cloudera/Prac_6/pride_and_prejudice.txt")
 
 // From HDFS
-val textFile = sc.textFile("hdfs:///user/cloudera/pride_and_prejudice.txt")
+val textFile = sc.textFile("hdfs:///prac_6/pride_and_prejudice.txt")
 
 5) Display First Few Lines:
 ~ Verify data loading by displaying the first few lines:
@@ -53,17 +56,21 @@ elizabethLines.take(5).foreach(println)
 1) Load the Dataset Using SparkContext:
 ~ Load the text file again if needed:
 < spark terminal >
-val textFile = sc.textFile("hdfs:///user/cloudera/pride_and_prejudice.txt")
+val textFile = sc.textFile("hdfs:///prac_6/pride_and_prejudice.txt")
 
 
 2) Perform Word Count:
 ~ Split each line into words, map each word to a count of 1, and then reduce by key (word) to get the total count for each word.
 < spark terminal >
-// Split lines, clean up words, and count occurrences
-val wordCounts = textFile.flatMap(line => line.split("\\s+"))       // Split by whitespace
-                         .map(word => (word.toLowerCase.replaceAll("[^a-zA-Z]", ""), 1))  // Clean words
-                         .filter(_._1.nonEmpty)                    // Remove empty strings
-                         .reduceByKey(_ + _)                       // Sum counts for each word
+val wordCounts = textFile
+  .flatMap(line => line.split("\\s+"))
+  .map(word => (word.toLowerCase.replaceAll("[^a-zA-Z]", ""), 1))
+  .filter(_._1.nonEmpty)
+  .reduceByKey(_ + _)
+
+for output
+wordCounts.collect().foreach { case (word, count) => println(s"$word: $count") }
+
 
 
 3) Display Top 10 Most Common Words:
@@ -76,14 +83,14 @@ topWords.take(10).foreach(println)
 4) Save Results to HDFS (Optional):
 ~ Save the word count results to an HDFS directory:
 < spark terminal >
-wordCounts.saveAsTextFile("hdfs:///user/cloudera/word_count_output")
+wordCounts.saveAsTextFile("hdfs:///prac_6/word_count_output")
 
 
 5) Verify Results (if saved to HDFS):
 ~ To verify the results saved in HDFS, use the following command:
 < bash >
-hdfs dfs -ls /user/cloudera/word_count_output
-hdfs dfs -cat /user/cloudera/word_count_output/part-00000
+hdfs dfs -ls /prac_6/word_count_output
+hdfs dfs -cat /prac_6/word_count_output/part-00000
 
 
 ---------------------------------------------------------------- Summary of Key Commands -----------------------------------------------------------------------------------------------------------
