@@ -1,9 +1,21 @@
 
-open cloudera create prat2 folder then right click open in terminal then write pwd
+open cloudera create prat2 folder then right click open in terminal then write pwd 
 [cloudera@quickstart Prac_2]$ ls
 WordCount.jar
 [cloudera@quickstart Prac_2]$ pwd
 /home/cloudera/Prac_2    [  // prac_2 folder maine create kiya tha mouse right click karke - new folder mai jaake ]
+
+___________________________________________________________
+
+Step 1: Set up Directories and Input Files
+Create a new folder for the practical files:
+[cloudera@quickstart ~]$ mkdir Prac_2
+
+Navigate to the folder:
+[cloudera@quickstart ~]$ cd Prac_2
+
+[cloudera@quickstart Prac_2]$ pwd
+
 
 [cloudera@quickstart Prac_2]$ cat > /home/cloudera/Prac_2/Processfile1.txt   [ command for creating a processfile1 .txt file in folder prac_2 ]
 Riyaz Ahamed               
