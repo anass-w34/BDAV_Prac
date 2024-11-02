@@ -17,8 +17,34 @@ Example Content (save as department.csv and upload to HDFS):
 3,Sales,Chicago
 4,Marketing,Boston
 
-Load department.csv into department table:
-LOAD DATA INPATH '/user/cloudera/department.csv' INTO TABLE department;
+[cloudera@quickstart Prac_4]$ hdfs dfs -mkdir /prac_4_department
+[cloudera@quickstart Prac_4]$ hdfs dfs -put /home/cloudera/Prac_4/department.csv /prac_4_department
+[cloudera@quickstart Prac_4]$ hdfs dfs -ls /prac_4_department
+
+*****************************************************************************
+[cloudera@quickstart Prac_4]$ sudo service zookeeper-server start
+
+[cloudera@quickstart Prac_4]$ sudo service hive-server2 start
+                                
+[cloudera@quickstart Prac_4]$ sudo hive
+
+hive> SHOW DATABASES;
+OK
+default
+user1
+Time taken: 2.84 seconds, Fetched: 2 row(s)
+
+hive> USE user1;
+OK
+Time taken: 0.227 seconds
+
+hive> SHOW TABLES;
+OK
+employee49
+Time taken: 0.388 seconds, Fetched: 1 row(s)
+**************************************************************************************
+LOAD DATA INPATH '/prac_4_department/department.csv' INTO TABLE department;
+
 
 
 
