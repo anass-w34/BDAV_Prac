@@ -69,6 +69,8 @@ Remove the input and output directories from HDFS if needed:
 Command to delete output directory in HDFS:
 hdfs dfs -rm -r /output_prac_2
 
+******************************************************************************************************
+before creation ad jars or can do after step 1 ie step 2
 
 
 Step 1: Set Up the Directory Structure
@@ -79,8 +81,12 @@ WordCount/               # Project root
  │       └── WordCount.java  # Java source file
  └── bin/                # Compiled classes output (if specified in Eclipse)
 
-
-
+step 2: wordcount right click
+build path
+configure build path --add external jars
+file systm - user - lib- hadoop -- select all
+again add external jars 
+file sytem -user-lib-hadoop-client --select all jars
 
 ***************** WordCount.java ***********************************
 
@@ -145,4 +151,12 @@ public class WordCount {
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
 }
+
+
+right click on wordcount thn export
+java - jar file
+
+borwse the path and save it in pract2 as WordCount (save as name)
+
+
 
