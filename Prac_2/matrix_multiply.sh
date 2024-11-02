@@ -1,10 +1,3 @@
-pwd 
-ls 
-[cloudera@quickstart Prac_2]$ cat > /home/cloudera/Prac_2/Processfile1.txt   [ command for creating a processfile1 .txt file in folder prac_2 ]
-[cloudera@quickstart Prac_2]$ cat /home/cloudera/Prac_2/Processfile1.txt  [ command for reading a processfile1 .txt file in folder prac_2  ] 
-[cloudera@quickstart Prac_2]$ hdfs dfs -put /home/cloudera/Prac_2/Processfile1.txt /Prac_2  [ command for copy a local file to hdfs directory ] 
-[cloudera@quickstart Prac_2]$ hdfs dfs -cat /Prac_2/Processfile1.txt         [ command for reading a file in hdfs directory ] 
-
 
 first create a Matrix_Multiply_M.txt text file in prac_2 folder in cloudera local directory 
 open Matrix_Multiply_M.txt text file and copy paste the following code 
@@ -25,38 +18,50 @@ N,1,1,8
 
 open eclipse in cloudera and create a new java projecct named - MatrixMultiplication  
 and package name - matrix_multiplication
- and class name - MatrixMultiplication.java 
- 
-Prepare Input Files:
-Create input files M.txt and N.txt with the content as specified for matrices M and N respectively.
-Upload these files to HDFS:
-hdfs dfs -mkdir /matrix_multiplication_1
-hdfs dfs -put Matrix_Multiply_M.txt /matrix_multiplication_1/
-hdfs dfs -put Matrix_Multiply_N.txt /matrix_multiplication_1/
+ and class name - MatrixMultiplication
+
+ Directory structure
+
+MatrixMultiplication/          # Project root
+ ├── src/                      # Source folder
+ │   └── matrix_multiplication/ # Package folder
+ │       └── MatrixMultiplication.java # Java source file
+ └── bin/                      # Compiled classes output (optional, if specified in IDE)
+
 
 open eclipse in cloudera and create a java project and make sure to add the follwoing dependcies 
-Step 1: Ensure Hadoop Libraries are Added to the Build Path
+Step 1:(add jar files from hadoop and client) Ensure Hadoop Libraries are Added to the Build Path
 Add Hadoop Libraries to the Project:
 In Eclipse, right-click your project (MatrixMultiplication).
 Go to Build Path > Configure Build Path > Libraries > Add External JARs.
 Locate and add the following Hadoop JARs from your Hadoop installation (typically found in /usr/lib/hadoop or $HADOOP_HOME):
 hadoop-common.jar
-hadoop-mapreduce-client-core.jar
+hadoop-mapreduce-client-core.jar 02.0
 hadoop-hdfs.jar
 hadoop-yarn-common.jar
 hadoop-mapreduce-client-common.jar
+
+ ****************************************************terminal**********************
+
+Create input files for hadoop
+hdfs dfs -mkdir /matrix_multiplication_1
+[cloudera@quickstart ~]$ cd Prac_2
+hdfs dfs -put Matrix_Multiply_M.txt /matrix_multiplication_1/
+hdfs dfs -put Matrix_Multiply_N.txt /matrix_multiplication_1/
+
 
 
 Execute the MapReduce Job
 Run the JAR file in Hadoop:
 hadoop jar matrix_multiply.jar matrix_multiplication.MatrixMultiplication /matrix_multiplication_1 /matrix_multiplication_1/output_matrix_1
 
-Check and Troubleshoot
-Verify that there are no existing output directories before running the job to avoid conflicts. Delete any previous output:
-hdfs dfs -rm -r /matrix_multiplication_1/output_matrix_1
+//Check and Troubleshoot
+//Verify that there are no existing output directories before running the job to avoid conflicts. Delete any previous output:
+//hdfs dfs -rm -r /matrix_multiplication_1/output_matrix_1
 
- View the Output
+View the Output
 After the job completes successfully, check the output:
+hdfs dfs -ls /
 hdfs dfs -ls /matrix_multiplication_1/output_matrix_1
 
 Use the hdfs dfs -cat command to view the result matrix:
@@ -167,12 +172,6 @@ public class MatrixMultiplication {
      }
  }
 
-Directory structure
-
-MatrixMultiplication/          # Project root
- ├── src/                      # Source folder
- │   └── matrix_multiplication/ # Package folder
- │       └── MatrixMultiplication.java # Java source file
- └── bin/                      # Compiled classes output (optional, if specified in IDE)
 
     
+after this export jar  (matrix_multiply)
