@@ -1,3 +1,5 @@
+
+open cloudera create prat2 folder then right click open in terminal then write pwd
 [cloudera@quickstart Prac_2]$ ls
 WordCount.jar
 [cloudera@quickstart Prac_2]$ pwd
